@@ -9,11 +9,11 @@ module.exports = {
   theme: {
     extend: {
       width: {
-        'xs': '320px',
+        xs: "320px",
       },
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
-      },
+      // fontFamily: {
+      //   inter: ["Inter", "sans-serif"],
+      // },
       colors: {
         "black-100": "#2B2C35",
         "primary-blue": {
@@ -28,9 +28,9 @@ module.exports = {
         grey: "#747A88",
       },
       backgroundImage: {
-        'pattern': "url('/pattern.png')",
-        'hero-bg': "url('/hero-bg.png')"
-      }
+        pattern: "url('/pattern.png')",
+        "hero-bg": "url('/hero-bg.png')",
+      },
     },
   },
   plugins: [],

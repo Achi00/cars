@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -8,11 +9,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Manrope", sans-serif;
+  font-family: 'Raleway', sans-serif;
+}
+
+.specs {
+  font-family: 'Raleway', sans-serif;
 }
 
 body, html {
-  background-color: black
+  background-color: #C2C3C3
 }
 
 /* START: General styles */
@@ -43,7 +48,7 @@ body, html {
 
 /* START: Hero styles */
 .hero {
-  @apply flex flex-col justify-between items-center  relative z-0 mx-auto;
+  @apply flex flex-col justify-between items-center z-0 mx-auto;
 }
 
 .hero__title {
@@ -54,12 +59,8 @@ body, html {
   @apply text-[27px] text-gray-600 font-light mt-5;
 }
 
-.hero__image-container {
-  @apply absolute inset-0 w-full h-full xl:h-screen z-[-1];
-}
-
 .hero__image {
-  @apply relative xl:w-full w-[100%] xl:h-full h-[100vh];
+  @apply absolute xl:w-full w-[100%] xl:h-full h-[100vh];
 }
 
 .hero__image-overlay {
@@ -70,7 +71,7 @@ body, html {
 /* START: Home styles */
 
 .home__text-container {
-  @apply flex flex-col items-center justify-center gap-y-2.5 text-white;
+  @apply flex flex-col items-center justify-end gap-y-2.5 text-white;
 }
 
 .home__filters {
@@ -192,7 +193,7 @@ body, html {
 
 /* START: searchbar styles */
 .searchbar {
-  @apply flex items-center justify-start max-sm:flex-col w-full relative max-sm:gap-4 max-w-3xl;
+  @apply flex items-center justify-start max-sm:flex-col w-full px-10 relative;
 }
 
 .searchbar__item {
@@ -206,7 +207,7 @@ body, html {
 
 /* START: search manufacturer styles */
 .search-manufacturer {
-  @apply flex-1 max-sm:w-full flex justify-start items-center bg-white rounded-lg;
+  @apply flex-1 w-[50%] flex justify-start items-center px-2 bg-white rounded-lg;
 }
 
 .search-manufacturer__input {
@@ -221,3 +222,8 @@ body, html {
   @apply cursor-default select-none py-2 pl-10 pr-4;
 }
 /* END: search manufacturer styles */
+
+h2 {
+  font-size: 3em;
+  font-weight: bold;
+}
