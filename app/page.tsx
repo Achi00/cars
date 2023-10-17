@@ -1,4 +1,4 @@
-import { Content, CustomFilter, Hero, Navbar, SearchBar } from "@/components";
+import { Content, CustomFilter, Navbar, SearchBar } from "@/components";
 import Image from "next/image";
 
 export default function Home() {
