@@ -1,5 +1,5 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"); */
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,15 +9,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
 .specs {
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-body, html {
-  background-color: #C2C3C3
+body,
+html {
+  background-color: #000000;
+  color: #fff;
 }
 
 /* START: General styles */

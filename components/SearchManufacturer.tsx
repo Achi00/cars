@@ -146,7 +146,7 @@ const SearchManufacturer = ({
 
   function CarCard({ title, details }) {
     return (
-      <div className="m-3 p-5 bg-white flex flex-col rounded-lg shadow-md w-[350px] h-[400px]:">
+      <div className="m-3 p-5 bg-[#121212] mt-8 flex flex-col rounded-lg shadow-md w-[350px] h-[400px]:">
         <h2 className="text-3xl font-bold">{title}</h2>
         <div className="flex w-full h-full items-center justify-center">
           <p className="text-lg">{details}</p>
@@ -184,17 +184,27 @@ const SearchManufacturer = ({
 
   return (
     <div className="w-full flex flex-col justify-center items-center">
+      <div className="flex p-5 justify-center items-center">
+        <div
+          className="bg-red-100 w-full border border-red-400 text-red-700 px-4 py-3 rounded-xl relative flex flex-col mt-5"
+          role="alert"
+        >
+          <strong className="font-bold">
+            After Pressing Search You Will See Real Time AI Streaming Effect
+          </strong>
+        </div>
+      </div>
       <div className="search-manufacturer">
         <Combobox value={manufacturer} onChange={setManufacturer}>
           <div className="relative w-full border-r border-black">
             <Combobox.Button className="absolute top-[14px]">
-              {/* <Image
+              <Image
                 src="/car-logo.svg"
                 width={20}
                 height={20}
                 className="ml-4"
                 alt="car logo"
-              /> */}
+              />
               <AiFillCar size={20} className="ml-4" />
             </Combobox.Button>
 
@@ -346,9 +356,13 @@ const SearchManufacturer = ({
           className="text-black w-[250px] border-2 border-black rounded-md"
           onClick={async (e) => {
             e.preventDefault();
-            // fetchCarDetails(manufacturer, selectedModel, selectedYear);
-            // await sendMessage({ manufacturer, selectedModel, selectedYear });
-            await handleImage(manufacturer, selectedModel, selectedYear);
+            try {
+              await sendMessage({ manufacturer, selectedModel, selectedYear });
+              // await handleImage(manufacturer, selectedModel, selectedYear);
+            } catch (error) {
+              console.error("Error occurred:", error);
+              // Handle the error or show a notification to the user
+            }
           }}
           disabled={!manufacturer || !selectedModel || !selectedYear}
         >
@@ -366,7 +380,7 @@ const SearchManufacturer = ({
             ))
           : null}
       </div>
-      {carImageUrl && <img src={carImageUrl} alt="Car" />}
+      {/* {carImageUrl && <img src={carImageUrl} alt="Car" />} */}
     </div>
   );
 };

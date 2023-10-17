@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Configuration, OpenAIApi } from "openai";
 import {
-  ChatGPTMessage,
   OpenAIStream,
   OpenAIStreamPayload,
 } from "@/lib/openai-stream";
