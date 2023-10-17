@@ -4,7 +4,6 @@ import { OpenAIStream, OpenAIStreamPayload } from "@/lib/openai-stream";
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   const message = req.body.messages;
   console.log("Received prompt:", message);
-  console.log("OPENAI_API_KEY:", process.env.NEXT_PUBLIC_OPENAI_API_KEY);
 
   if (!message) {
     res
