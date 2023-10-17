@@ -1,12 +1,16 @@
 import { MouseEventHandler } from "react";
 
 export interface CustomButtonProps {
-    title: string;
-    containerStyles: string
-    handleClick?: MouseEventHandler<HTMLButtonElement>
+  title: string;
+  containerStyles: string;
+  handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface SearchManufacturerProps{
-    manufacturer: string;
-    setManufacturer: (manufacturer: string) => void;
+export interface SearchManufacturerProps {
+  manufacturer: string;
+  setManufacturer: (manufacturer: string) => void;
+}
+export interface CarCardProps {
+  title: string;
+  details: string;
 }

@@ -3,11 +3,10 @@ import Image from "next/image";
 import { Fragment, useEffect, useState } from "react";
 import { Combobox, Transition, Listbox } from "@headlessui/react";
 import { useMutation } from "@tanstack/react-query";
-import { SearchManufacturerProps } from "@/types";
+import { CarCardProps, SearchManufacturerProps } from "@/types";
 import { manufacturers } from "@/constants";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import nanoid from "nanoid";
-import ReactHtmlParser from "react-html-parser";
 import { AiFillCar } from "react-icons/ai";
 
 const SearchManufacturer = ({
@@ -59,44 +58,46 @@ const SearchManufacturer = ({
         }),
       });
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder("utf-8");
-      let result = "";
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) {
-          break;
+      if (response.body) {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let result = "";
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) {
+            break;
+          }
+          const chunk = decoder.decode(value);
+          setCarDetails((prevData) => (prevData ? prevData + chunk : chunk));
+          result += chunk;
         }
-        const chunk = decoder.decode(value);
-        setCarDetails((prevData) => (prevData ? prevData + chunk : chunk));
-        result += chunk;
+        return result; // the whole response
       }
-      return result; // the whole response
     },
     // No onSuccess necessary since you're processing each chunk in the mutation function
   });
 
-  const handleImage = async (manufacturer, selectedModel, selectedYear) => {
-    const prompt = `${manufacturer} ${selectedModel} ${selectedYear}`;
-    try {
-      const response = await fetch("/api/image", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ prompt: prompt }),
-      });
-      if (!response.ok) {
-        throw new Error("unable to generate image");
-      }
-      const data = await response.json();
-      // set the state with the image URL
-      setCarImageUrl(data.data[0].url);
-      // setCarImageUrl(data.url);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // const handleImage = async (manufacturer, selectedModel, selectedYear) => {
+  //   const prompt = `${manufacturer} ${selectedModel} ${selectedYear}`;
+  //   try {
+  //     const response = await fetch("/api/image", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ prompt: prompt }),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("unable to generate image");
+  //     }
+  //     const data = await response.json();
+  //     // set the state with the image URL
+  //     setCarImageUrl(data.data[0].url);
+  //     // setCarImageUrl(data.url);
+  //   } catch (error: any) {
+  //     console.log(error.message);
+  //   }
+  // };
 
   const years = Array.from({ length: 2023 - 1950 + 1 }, (_, i) => 2023 - i).map(
     String
@@ -144,7 +145,7 @@ const SearchManufacturer = ({
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
-  function CarCard({ title, details }) {
+  function CarCard({ title, details }: CarCardProps) {
     return (
       <div className="m-3 p-5 bg-[#121212] mt-8 flex flex-col rounded-lg shadow-md w-[350px] h-[400px]:">
         <h2 className="text-3xl font-bold">{title}</h2>
@@ -155,7 +156,7 @@ const SearchManufacturer = ({
     );
   }
 
-  function splitCarDetails(carDetails) {
+  function splitCarDetails(carDetails: string) {
     const parser = new DOMParser();
     const parsed = parser.parseFromString(carDetails, "text/html");
     const sections = Array.from(parsed.getElementsByTagName("h2")).map(
@@ -374,7 +375,7 @@ const SearchManufacturer = ({
           ? splitCarDetails(formattedCarDetails).map((section, index) => (
               <CarCard
                 key={index}
-                title={section.title}
+                title={section.title || ""}
                 details={section.details}
               />
             ))
