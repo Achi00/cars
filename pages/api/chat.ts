@@ -1,8 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import {
-  OpenAIStream,
-  OpenAIStreamPayload,
-} from "@/lib/openai-stream";
+import { OpenAIStream, OpenAIStreamPayload } from "@/lib/openai-stream";
 
 export default async function POST(req: NextApiRequest, res: NextApiResponse) {
   const message = req.body.messages;
@@ -33,12 +30,12 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     res.setHeader("Content-Type", "text/plain"); // Ensure the correct header is set
 
-    for await (const chunk of stream) {
+    for await (const chunk of stream as any) {
       res.write(chunk); // Send the chunk to the client immediately
     }
 
     res.end(); // End the response when all chunks have been processed
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     res.status(500).json({ error: error.message });
   }
